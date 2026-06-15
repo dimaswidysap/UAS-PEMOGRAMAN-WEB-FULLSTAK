@@ -1,0 +1,148 @@
+.container {
+    width: min(1400px, 100%);
+    margin-inline: auto;
+    padding-inline: 2rem;
+}
+
+/* ========================================= */
+
+.header {
+    height: 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-primary);
+}
+.header div:nth-child(1){
+    display: flex;
+    gap: 0.3rem;
+    height: 100%;
+    align-items: center;
+    /* background-color: blue; */
+    color: var(--text);
+}
+
+.icon-app{
+    /* color: var(--text); */
+    display: flex;
+    height: 70% !important;
+    aspect-ratio: 1/1 !important;
+}
+.header div:nth-child(1) strong{
+    font-weight: 900;
+    font-size: 1.1em;
+}
+
+
+.header ul{
+    display: flex;
+    gap: 1rem;
+}
+
+
+.con-auth{
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.btn-header{
+    display: inline-flex;
+    background-color: var(--text);
+    color: var(--base);
+    align-items: center;
+    padding: 0.3rem 0.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    gap: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.btn-header div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--base);
+    height: 2rem !important;
+    aspect-ratio: 1/1;
+    background-color: var(--base);
+    border-radius: 50%;
+    padding: 0.2rem;
+
+}
+.btn-header span{
+    font-weight: 700;
+    font-size: 1.2em;
+    font-family: var(--font-primary);
+}
+
+/* ========================================= */
+
+.hero-section {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-banner {
+    position: relative;
+    flex: 1;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 2rem;
+
+    background: rgba(0, 0, 0, 0.35);
+}
+
+.hero-overlay h1 {
+    max-width: 800px;
+    font-family: var(--font-secondary);
+    color: white;
+    text-align: center;
+    font-size: clamp(1.5rem, 3vw, 3rem);
+    font-weight: 900;
+    line-height: 1.3;
+}
+
+/* ========================================= */
+
+.feature-section {
+    min-height: 100svh;
+}
+
+/* ========================================= */
+
+@media (max-width: 640px) {
+
+    .container{
+        padding-inline: 0.5rem;
+    }
+
+    .hero-banner {
+        aspect-ratio: 2 / 3;
+    }
+
+    .hero-overlay h1 {
+        font-size: 1.5rem;
+    }
+    .hero-banner {
+    border-radius: 2px;
+}
+}
