@@ -83,9 +83,13 @@
     color: var(--text);
 }
 
+.second-btn {
+    color: var(--base) !important;
+}
+
 .btn-header span {
     font-weight: 700;
-    font-size: 1.2em;
+    font-size: 1em;
     font-family: var(--font-primary);
 }
 
@@ -157,7 +161,7 @@
     padding: 0.2rem 0.9rem;
     font-family: var(--font-secondary);
     border-radius: 50px;
-    background-color: var(--text);
+    background-color: var(--secondary);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
@@ -279,7 +283,7 @@
 
     .btn-header {
         background-color: var(--base);
-        color: var(--text);
+        color: var(--text) !important;
         box-shadow: none;
     }
 }
@@ -339,12 +343,49 @@
     aspect-ratio: 1/1;
     /* background-color: aqua; */
     color: var(--base);
-    scale: 1.5;
+    /* scale: 1.5; */
+    font-family: var(--font-secondary);
 }
 
 .location .con-figure div:nth-child(1) {
-    rotate: 12deg;
+    /* rotate: 12deg; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+.location .con-figure div:nth-child(1) span:nth-child(1) {
+    font-size: 2em;
+    /* scale: 122%; */
+    text-align: center;
+    font-weight: 900;
+}
+
 .location .con-figure div:nth-child(2) {
-    rotate: -20deg;
+    /* rotate: -20deg; */
+    /* background-color: aqua; */
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.location .con-figure div:nth-child(2) img {
+    width: 100%;
+    object-fit: cover;
+}
+@media (max-width: 640px) {
+    .location .con-figure div:nth-child(1) {
+        /* background-color: red; */
+        width: 100%;
+    }
+    .location .con-figure div:nth-child(1) span:nth-child(1) {
+        font-size: 2em;
+        scale: 122%;
+        font-weight: 900;
+    }
+    .location .con-figure div:nth-child(2) {
+        /* rotate: -20deg; */
+        background-color: green;
+        display: none;
+    }
 }

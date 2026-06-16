@@ -137,9 +137,12 @@
                 <section class="con-text"></section>
                 <section class="con-figure">
                     <div>
-
+                        <span>KOTA MADIUN</span>
+                        <span>Jawa Timur</span>
                     </div>
-                    <div></div>
+                    <div>
+                        <img src="{{ asset('images/city.png') }}" alt="city">
+                    </div>
                 </section>
             </div>
         </section>

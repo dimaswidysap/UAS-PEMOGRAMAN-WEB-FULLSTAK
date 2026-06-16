@@ -1,0 +1,249 @@
+/* ─── Wrapper ────────────────────────────────── */
+.signup-wrapper {
+    min-height: 100vh;
+    background-color: var(--base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    font-family: var(--font-primary), sans-serif;
+}
+
+/* ─── Card ───────────────────────────────────── */
+.signup-card {
+    width: 100%;
+    max-width: 440px;
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 4px 24px rgba(30, 58, 95, 0.08);
+}
+
+/* ─── Header ─────────────────────────────────── */
+.signup-header {
+    margin-bottom: 2rem;
+}
+
+.signup-title {
+    font-family: var(--font-primary), sans-serif;
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--secondary);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.signup-title::after {
+    content: "";
+    display: block;
+    width: 36px;
+    height: 3px;
+    background-color: var(--accent);
+    margin-top: 10px;
+    border-radius: 2px;
+}
+
+.signup-subtitle {
+    font-family: var(--font-secondary), sans-serif;
+    font-size: 0.875rem;
+    color: var(--text);
+    opacity: 0.65;
+    margin-top: 0.75rem;
+    font-weight: 400;
+}
+
+/* ─── Form ───────────────────────────────────── */
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-label {
+    font-family: var(--font-secondary), sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--secondary);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrapper .form-input {
+    padding-right: 2.75rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-family: var(--font-primary), sans-serif;
+    font-size: 0.9375rem;
+    color: var(--text);
+    background-color: var(--base);
+    border: 1.5px solid transparent;
+    border-radius: 10px;
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.form-input::placeholder {
+    color: var(--text);
+    opacity: 0.4;
+}
+
+.form-input:focus {
+    border-color: var(--accent);
+    background-color: #fff;
+}
+
+.form-input.is-error {
+    border-color: #c0392b;
+}
+
+.form-error {
+    font-family: var(--font-primary), sans-serif;
+    font-size: 0.8125rem;
+    color: #c0392b;
+    margin-top: 0.1rem;
+}
+
+/* ─── Toggle password button ─────────────────── */
+.toggle-password {
+    position: absolute;
+    right: 0.875rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text);
+    opacity: 0.45;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    transition: opacity 0.2s ease;
+}
+
+.toggle-password:hover {
+    opacity: 0.9;
+}
+
+/* ─── Actions ────────────────────────────────── */
+.form-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    font-family: var(--font-primary), sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background-color: var(--secondary);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    letter-spacing: 0.01em;
+    transition:
+        background-color 0.2s ease,
+        transform 0.1s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent);
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-family: var(--font-secondary), sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--secondary);
+    background-color: transparent;
+    border: 1.5px solid var(--secondary);
+    border-radius: 10px;
+    text-decoration: none;
+    transition:
+        color 0.2s ease,
+        border-color 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.btn-back:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background-color: rgba(181, 136, 0, 0.05);
+}
+
+/* ─── Footer text ────────────────────────────── */
+.signup-login {
+    margin-top: 1.75rem;
+    text-align: center;
+    font-family: var(--font-primary), sans-serif;
+    font-size: 0.875rem;
+    color: var(--text);
+    opacity: 0.75;
+}
+
+.login-link {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+}
+
+.login-link:hover {
+    opacity: 0.75;
+}
+
+/* ─── Responsive ─────────────────────────────── */
+@media (max-width: 480px) {
+    .signup-card {
+        padding: 2rem 1.25rem;
+        border-radius: 12px;
+    }
+
+    .signup-title {
+        font-size: 1.625rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .signup-card {
+        padding: 1.75rem 1rem;
+    }
+
+    .signup-title {
+        font-size: 1.5rem;
+    }
+
+    .btn-primary,
+    .btn-back {
+        font-size: 0.9rem;
+    }
+}

@@ -1,0 +1,63 @@
+/* ─── Alert (login error) ────────────────────── */
+.form-alert {
+    padding: 0.75rem 1rem;
+    background-color: rgba(192, 57, 43, 0.08);
+    border-left: 3px solid #c0392b;
+    border-radius: 8px;
+    font-family: var(--font-primary), sans-serif;
+    font-size: 0.875rem;
+    color: #c0392b;
+}
+
+/* ─── Remember me ────────────────────────────── */
+.form-remember {
+    margin-top: -0.25rem;
+}
+
+.remember-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    font-family: var(--font-primary), sans-serif;
+    font-size: 0.875rem;
+    color: var(--text);
+    user-select: none;
+}
+
+.remember-checkbox {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.remember-custom {
+    width: 17px;
+    height: 17px;
+    min-width: 17px;
+    border: 1.5px solid var(--secondary);
+    border-radius: 5px;
+    background-color: var(--base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.remember-checkbox:checked + .remember-custom {
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
+.remember-checkbox:checked + .remember-custom::after {
+    content: "";
+    display: block;
+    width: 9px;
+    height: 5px;
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(-45deg) translateY(-1px);
+}

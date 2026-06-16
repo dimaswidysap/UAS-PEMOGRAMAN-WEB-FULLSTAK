@@ -1,10 +1,10 @@
 <li>
-    <button class="btn-header first-btn">
+    <a href="{{ route('signup-page') }}" class="btn-header first-btn">
         <span>Sign up</span>
-    </button>
+    </a>
 </li>
 <li>
-    <button class="btn-header">
+    <a href='{{ route('login-page') }}' class="btn-header second-btn">
         <span>Login</span>
-    </button>
+    </a>
 </li>
