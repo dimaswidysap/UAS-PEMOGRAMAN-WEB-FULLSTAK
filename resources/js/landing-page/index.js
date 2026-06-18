@@ -1,32 +1,36 @@
-// sidebar
-{
-    const hamBtn = document.querySelector(".hamburger-btn");
-    const hamClose = document.querySelector(".ham-close");
-    const sidebar = document.querySelector(".container-sidebar");
+// Sidebar mobile toggle
+document.addEventListener("DOMContentLoaded", () => {
+    const hamburger = document.querySelector(".hamburger-btn");
+    const sidebar = document.querySelector(".sidebar");
+    const overlay = document.querySelector(".sidebar-overlay");
+    const closeBtn = document.querySelector(".sidebar-close");
 
-    hamBtn.addEventListener("click", () => {
-        sidebar.style.transform = "translateX(0)";
+    const openSidebar = () => {
+        sidebar.classList.add("open");
+        overlay.classList.add("active");
+        hamburger.setAttribute("aria-expanded", "true");
+        document.body.style.overflow = "hidden";
+    };
+
+    const closeSidebar = () => {
+        sidebar.classList.remove("open");
+        overlay.classList.remove("active");
+        hamburger.setAttribute("aria-expanded", "false");
+        document.body.style.overflow = "";
+    };
+
+    hamburger?.addEventListener("click", openSidebar);
+    closeBtn?.addEventListener("click", closeSidebar);
+    overlay?.addEventListener("click", closeSidebar);
+
+    // Close on Escape
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeSidebar();
     });
+});
 
-    hamClose.addEventListener("click", () => {
-        sidebar.style.transform = "translateX(110%)";
-    });
+const header = document.querySelector(".header");
 
-    document.addEventListener("click", (e) => {
-        const isClickInsideSidebar = sidebar.contains(e.target);
-        const isClickHamburger = hamBtn.contains(e.target);
-
-        if (!isClickInsideSidebar && !isClickHamburger) {
-            sidebar.style.transform = "translateX(110%)";
-        }
-    });
-}
-
-// header
-{
-    const header = document.querySelector(".header");
-
-    window.addEventListener("scroll", () => {
-        header.classList.toggle("header-active", window.scrollY > 0);
-    });
-}
+window.addEventListener("scroll", () => {
+    // header.classList.toggle("header-active", window.scrollY > 0);
+});
