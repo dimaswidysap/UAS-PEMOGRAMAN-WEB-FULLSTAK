@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Admin;
 use App\Http\Controllers\Admin\Category;
 use App\Http\Controllers\Admin\AdminRooms;
 use App\Http\Controllers\Admin\AdminUsers;
+use App\Http\Controllers\Admin\AdminFacilities;
 use App\Http\Controllers\Auth\Signup;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,16 @@ Route::prefix('admin')->group(function () {
 
     // dashboard
     Route::get('/dashboard', [Admin::class, 'index'])->name('index');
+
+    // facilities
+    Route::get('/facilities',[AdminFacilities::class,'index'])->name('facility-index');
+    Route::get('/facilities/create',[AdminFacilities::class,'showFormFacilities'])->name('facility-create');
+    Route::post('/facilitiesSubmit',[AdminFacilities::class,'facilitiesSubmit'])->name('facility-create-submit');
+    Route::get('/facilities/detail/{id}',[AdminFacilities::class,'detailFacilities'])->name('facility-view');
+    Route::get('/facilities/update/{id}',[AdminFacilities::class,'updateFacilitiesForm'])->name('facility-update-form');
+    Route::post('/facilitiesUpdate/{id}',[AdminFacilities::class,'updateFacilities'])->name('facility-update-submit');
+    Route::delete('/facilitiesDelete/{id}',[AdminFacilities::class,'destroyFacilities'])->name('facility-delete');
+
 
     // user
     Route::get('/users',[AdminUsers::class,'index'])->name('user-index');
