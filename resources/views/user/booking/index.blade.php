@@ -1,57 +1,68 @@
 @extends('layouts.app')
-@vite(['resources/css/user/booking/index.css','resources/css/layouts/index.css'])
+@vite(['resources/css/user/booking/index.css', 'resources/css/layouts/index.css'])
 
 @section('content')
-@include('components.navigasi-user.index')
-<section class="room-page">
+    @include('components.navigasi-user.index')
+    <section class="room-page">
 
 
-    <section class="container-rooms">
+        <section class="container-rooms">
 
-        @forelse ($rooms as $room)
+            @forelse ($rooms as $room)
+                <section class="container-room">
 
-            <section class="container-room">
+                    <figure class="container-image">
 
-                <figure class="container-image">
+                        @if ($room->image)
+                            <img src="{{ asset('uploads/rooms/' . $room->image) }}" alt="{{ $room->name }}">
+                        @endif
 
-                    @if($room->image)
-                        <img src="{{ asset('uploads/rooms/'.$room->image) }}"
-                             alt="{{ $room->name }}">
-                    @endif
+                    </figure>
 
-                </figure>
+                    <div class="container-desc">
 
-                <div class="container-desc">
+                        <h2>{{ $room->name }}</h2>
 
-                    <h2>{{ $room->name }}</h2>
+                        <span class="capacity">
+                            <span class="nnaowm">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <!-- Kepala pengguna utama -->
+                                    <circle cx="9" cy="8" r="3"></circle>
 
-                    <span class="capacity">
-                        👥 {{ $room->capacity }} Orang
-                    </span>
+                                    <!-- Kepala pengguna kedua -->
+                                    <circle cx="17" cy="10" r="2.5"></circle>
 
-                    <p>
-                        {{ Str::limit($room->description,100) }}
-                    </p>
+                                    <!-- Badan pengguna utama -->
+                                    <path d="M3 19c0-3.3 2.7-6 6-6s6 2.7 6 6"></path>
 
-                </div>
+                                    <!-- Badan pengguna kedua -->
+                                    <path d="M14 19c0-2.2 1.8-4 4-4s4 1.8 4 4"></path>
+                                </svg>
+                            </span>
+                            {{ $room->capacity }} Orang
+                        </span>
 
-                <a href="{{ route('booking-detail',$room->id) }}"
-                    class="btn-booking">
+                        <p>
+                            {{ Str::limit($room->description, 100) }}
+                        </p>
 
-                    Lihat Detail
+                    </div>
 
-                </a>
+                    <a href="{{ route('booking-detail', $room->id) }}" class="btn-booking">
 
-            </section>
+                        Lihat Detail
 
-        @empty
+                    </a>
 
-            <h1>Data ruangan belum tersedia</h1>
+                </section>
 
-        @endforelse
+            @empty
+
+                <h1>Data ruangan belum tersedia</h1>
+            @endforelse
+
+        </section>
 
     </section>
-
-</section>
-
 @endsection
