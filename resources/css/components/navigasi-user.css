@@ -1,13 +1,325 @@
+/* =============================================
+   resources/css/components/navigasi-user.css
+   Konsisten dengan navigasi-admin.css
+   ============================================= */
+
+/* ---- Header bar ---- */
 .navigasi-user {
     position: fixed;
-    height: 5rem;
-    width: 100%;
-    inset: 0;
-    background-color: var(--base);
+    top: 0;
+    left: 0;
+    right: 0;
     z-index: 100;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-    padding: 0 1rem;
+    height: 64px;
+    background-color: var(--secondary);
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+    gap: 1rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+}
+
+/* =============================================
+   PROFIL
+   ============================================= */
+
+.container-profil {
+    height: 60%;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    flex-shrink: 0;
+}
+
+.container-profil figure {
+    position: relative;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    border-radius: 35%;
+    background-color: rgba(255, 255, 255, 0.1);
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* SVG fallback avatar */
+.container-profil figure svg {
+    width: 60%;
+    height: 60%;
+}
+
+/* Indikator online */
+.container-profil figure::before {
+    content: "";
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    background-color: var(--accent, #10b981);
+    border: 2px solid var(--secondary, #1e3a5f);
+    border-radius: 50%;
+    bottom: -1px;
+    right: -2px;
+}
+
+.container-profil > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.container-profil span {
+    display: inline-flex;
+    gap: 0.3rem;
+    font-family: var(--font-secondary, "Montserrat"), sans-serif;
+    font-weight: 500;
+    color: #ffffff;
+    font-size: 0.82rem;
+    line-height: 1.2;
+}
+
+.container-profil span p {
+    font-weight: 700;
+    color: var(--accent, #10b981);
+}
+
+.container-profil div span:nth-child(2) {
+    font-size: 0.7rem;
+    font-family: var(--font-primary, "Outfit"), sans-serif;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 400;
+}
+
+/* =============================================
+   SEARCH
+   ============================================= */
+
+.container-search {
+    position: relative;
+    height: 36px;
+    width: clamp(180px, 35vw, 420px);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1.5px solid rgba(255, 255, 255, 0.18);
+    background-color: rgba(255, 255, 255, 0.08);
+    transition:
+        border-color 0.2s,
+        background-color 0.2s;
+    flex-shrink: 1;
+}
+
+.container-search:focus-within {
+    border-color: var(--accent, #10b981);
+    background-color: rgba(255, 255, 255, 0.13);
+}
+
+.container-search input {
+    height: 100%;
+    width: 100%;
+    padding: 0 2.5rem 0 0.9rem;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: var(--font-primary, "Outfit"), sans-serif;
+    font-size: 0.82rem;
+    color: #ffffff;
+}
+
+.container-search input::placeholder {
+    color: rgba(255, 255, 255, 0.38);
+}
+
+.btn-search {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.45);
+    padding: 6px;
+    border-radius: 0 6px 6px 0;
+    transition: color 0.15s;
+}
+
+.btn-search:hover {
+    color: var(--accent, #10b981);
+}
+
+.btn-search svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* =============================================
+   MENU DROPDOWN (tiga titik)
+   ============================================= */
+
+.container-menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.menu-button {
+    width: 2.2rem;
+    height: 2.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.75);
+    border-radius: 8px;
+    border: 1.5px solid rgba(255, 255, 255, 0.18);
+    cursor: pointer;
+    transition:
+        background-color 0.15s,
+        border-color 0.15s,
+        color 0.15s;
+}
+
+.menu-button svg {
+    width: 1.15rem;
+}
+
+.menu-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.35);
+    color: #ffffff;
+}
+
+/* Dropdown panel */
+.menu-dropdown {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    min-width: 210px;
+    background: #ffffff;
+    border: 1px solid var(--border, #bdbdbd);
+    border-left: 4px solid var(--accent, #10b981);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.14);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition:
+        opacity 0.22s ease,
+        transform 0.22s ease,
+        visibility 0.22s;
+}
+
+.container-menu:hover .menu-dropdown,
+.container-menu:focus-within .menu-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.menu-dropdown ul {
+    list-style: none;
+    padding: 0.5rem;
+}
+
+.menu-dropdown li {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.menu-dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.65rem;
+    color: var(--text, #2d2d2d);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-family: var(--font-primary, "Outfit"), sans-serif;
+    font-weight: 600;
+    border-radius: 7px;
+    border: 1px solid transparent;
+    transition:
+        background-color 0.15s,
+        border-color 0.15s,
+        color 0.15s;
+    position: relative;
+}
+
+/* Icon wrapper */
+.menu-dropdown a span:nth-child(1) {
+    display: inline-flex;
+    width: 1.9rem;
+    height: 1.9rem;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--base, #eeeeee);
+    border-radius: 6px;
+    flex-shrink: 0;
+    transition:
+        background-color 0.15s,
+        color 0.15s;
+}
+
+.menu-dropdown a span:nth-child(1) svg {
+    width: 0.95rem;
+    height: 0.95rem;
+}
+
+.menu-dropdown a:hover {
+    background-color: #f0fdf9;
+    border-color: rgba(16, 185, 129, 0.2);
+    color: var(--accent, #10b981);
+}
+
+.menu-dropdown a:hover span:nth-child(1) {
+    background-color: rgba(16, 185, 129, 0.12);
+    color: var(--accent, #10b981);
+}
+
+/* Logout — warna bahaya */
+.menu-dropdown a.logout-link {
+    color: var(--danger, rgb(188, 0, 0));
+}
+
+.menu-dropdown a.logout-link span:nth-child(1) {
+    color: var(--danger, rgb(188, 0, 0));
+}
+
+.menu-dropdown a.logout-link:hover {
+    background-color: rgba(188, 0, 0, 0.05);
+    border-color: rgba(188, 0, 0, 0.15);
+    color: var(--danger, rgb(188, 0, 0));
+}
+
+.menu-dropdown a.logout-link:hover span:nth-child(1) {
+    background-color: rgba(188, 0, 0, 0.08);
+    color: var(--danger, rgb(188, 0, 0));
+}
+
+/* Divider sebelum logout */
+.menu-dropdown .menu-divider {
+    height: 1px;
+    background-color: var(--border, #bdbdbd);
+    margin: 0.35rem 0;
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+
+@media (max-width: 560px) {
+    .container-search {
+        display: none;
+    }
 }

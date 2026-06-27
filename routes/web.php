@@ -30,8 +30,6 @@ Route::prefix('/user')->group(function () {
     Route::post('/loginSubmit',[UserLoginController::class,'loginUser'])->name('user-login-submit');
     route::get('/logoutUser',[UserLoginController::class,'userLogout'])->name('user-logout');
 
-
-
     Route::middleware(['auth', 'CheckUser'])->group(function () {
         Route::get('/', [UserBooking::class, 'index'])->name('index-user');
         Route::get('booking/detail/{id}', [UserBooking::class, 'bookingDetail'])->name('booking-detail');
