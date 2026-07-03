@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@vite(['resources/css/admin/category/update.css'])
 @section('content')
     <form action="{{ route('category-update-submit', $room->id) }}" method="POST" enctype="multipart/form-data"
         class="modern-form">
