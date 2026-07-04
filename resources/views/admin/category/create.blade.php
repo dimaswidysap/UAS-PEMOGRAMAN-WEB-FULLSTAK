@@ -3,15 +3,22 @@
 @section('content')
     <section class="main-container">
         <div class="cat-page">
-            @if ($errors->any())
-                <div class="alert alert-error">
-                    <strong>Periksa kembali isian Anda:</strong>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+            <div class="hero-head">
+                <div class="hero-text">
+                    <p class="eyebrow">Manajemen Venue</p>
+                    <h1>Tambah Kategori Ruangan</h1>
+                    <p class="subtitle">Buat kategori baru untuk mengelompokkan ruangan/venue di platform.</p>
                 </div>
+                <a href="{{ route('index-category') }}" class="btn btn-outline">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                    Kembali
+                </a>
+            </div>
+
+            @if ($errors->any())
+
             @endif
 
             @if (session('success'))
@@ -75,7 +82,7 @@
                                 <label class="color-swatch-wrap">
                                     <input type="color" id="color_picker" value="{{ old('color', '#3B82F6') }}">
                                     <span class="color-swatch" id="colorSwatch"
-                                        style="background: {{ old('color', '#3B82F6') }}"></span>
+                                        style="background: <?= old('color', '#3B82F6') ?>"></span>
                                 </label>
                                 <input type="text" name="color" id="color"
                                     class="form-control @error('color') is-invalid @enderror"
@@ -217,8 +224,6 @@
                 </div>
             </form>
         </div>
-
-
 
         <script>
             const colorPicker = document.getElementById('color_picker');
