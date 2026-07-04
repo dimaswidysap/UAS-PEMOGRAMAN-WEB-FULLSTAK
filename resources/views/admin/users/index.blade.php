@@ -1,7 +1,7 @@
 @extends('layouts.app')
+@vite(['resources/css/admin/users/index.css','resources/css/layouts/index.css'])
 
 @section('content')
-    @vite('resources/css/admin/users/index.css')
 
     @include('components.navigasi-admin.index')
 
