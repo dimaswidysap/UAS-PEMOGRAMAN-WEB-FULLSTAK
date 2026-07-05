@@ -14,9 +14,10 @@
     max-width: 500px;
     padding: 2.5rem;
     border-radius: 16px;
-     border: 2px solid var(--border); 
+    border: 2px solid var(--border);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-secondary);
+    /* font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; */
 }
 
 .header-title-wrapper {
@@ -68,6 +69,7 @@
     outline: none;
     transition: all 0.2s ease;
     box-sizing: border-box;
+    font-family: var(--font-primary);
 }
 
 .form-input:focus {
@@ -98,6 +100,7 @@
     text-align: center;
     font-size: 1rem;
     transition: background-color 0.2s;
+    font-family: var(--font-secondary);
 }
 
 .btn-submit:hover {
@@ -115,6 +118,7 @@
     text-align: center;
     font-size: 0.95rem;
     transition: all 0.2s;
+    font-family: var(--font-secondary);
 }
 
 .btn-cancel:hover {

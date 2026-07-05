@@ -86,7 +86,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/category/create', [Category::class, 'showCreateForm'])->name('category-create');
         Route::post('/create', [Category::class, 'create'])->name('category-submit');
         Route::get('/category/update/{id}', [Category::class, 'showUpdateForm'])->name('category-update');
-       Route::post('/category/update/{id}', [Category::class, 'update'])->name('category-update-submit');
+        Route::post('/category/update/{id}', [Category::class, 'update'])->name('category-update-submit');
         Route::get('/category/{id}', [Category::class, 'view'])->name('category-view');
         Route::delete('/category/delete/{id}', [Category::class, 'destroy'])->name('category-destroy');
     });

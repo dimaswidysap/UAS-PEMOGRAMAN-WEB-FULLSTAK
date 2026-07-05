@@ -1,10 +1,10 @@
 @extends('layouts.app')
- 
+
 @section('content')
     @vite('resources/css/admin/facilities/update.css')
- 
+
     @include('components.navigasi-admin.index')
- 
+
     <section class="main-container">
         <div class="fac-page">
              <div class="hero-head">
@@ -20,7 +20,7 @@
                     Kembali
                 </a>
             </div>
- 
+
             @if ($errors->any())
                 <div class="alert alert-error">
                     <strong>Periksa kembali isian Anda:</strong>
@@ -31,10 +31,10 @@
                     </ul>
                 </div>
             @endif
- 
+
             <form action="{{ route('facility-update-submit', $update->id) }}" method="POST" class="fac-form">
                 @csrf
- 
+
                 <div class="card">
                     <div class="step-marker">1</div>
                     <div class="card-head">
@@ -49,7 +49,7 @@
                             <p>Nama dan jumlah fasilitas ruangan</p>
                         </div>
                     </div>
- 
+
                     <div class="form-grid">
                         <div class="form-group full">
                             <label for="room_id">RUANGAN</label>
@@ -62,7 +62,7 @@
                                 @endforeach
                             </select>
                         </div>
- 
+
                         <div class="form-group">
                             <label for="name">NAMA FASILITAS</label>
                             <input type="text" name="name" id="name"
@@ -71,7 +71,7 @@
                                 placeholder="Contoh: Proyektor">
                             @error('name')<span class="error-text">{{ $message }}</span>@enderror
                         </div>
- 
+
                         <div class="form-group">
                             <label for="quantity">JUMLAH</label>
                             <div class="input-suffix">
@@ -84,7 +84,7 @@
                         </div>
                     </div>
                 </div>
- 
+
                 <div class="card">
                     <div class="step-marker">2</div>
                     <div class="card-head">
@@ -98,7 +98,7 @@
                             <p>Status kondisi fasilitas saat ini</p>
                         </div>
                     </div>
- 
+
                     <div class="kondisi-grid">
                         <label class="kondisi-card @if($update->condition == 'Baik') active @endif" id="label-baik">
                             <input type="radio" name="condition" value="Baik" {{ $update->condition == 'Baik' ? 'checked' : '' }}>
@@ -110,7 +110,7 @@
                             <strong>Baik</strong>
                             <small>Fasilitas berfungsi normal</small>
                         </label>
- 
+
                         <label class="kondisi-card @if($update->condition == 'Rusak Ringan') active @endif" id="label-rusak-ringan">
                             <input type="radio" name="condition" value="Rusak Ringan" {{ $update->condition == 'Rusak Ringan' ? 'checked' : '' }}>
                             <div class="kondisi-icon rusak-ringan">
@@ -122,7 +122,7 @@
                             <strong>Rusak Ringan</strong>
                             <small>Masih bisa digunakan</small>
                         </label>
- 
+
                         <label class="kondisi-card @if($update->condition == 'Rusak Berat') active @endif" id="label-rusak-berat">
                             <input type="radio" name="condition" value="Rusak Berat" {{ $update->condition == 'Rusak Berat' ? 'checked' : '' }}>
                             <div class="kondisi-icon rusak-berat">
@@ -136,7 +136,7 @@
                         </label>
                     </div>
                 </div>
- 
+
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -147,10 +147,10 @@
                     <a href="{{ route('facility-index') }}" class="btn btn-ghost">Batal</a>
                 </div>
             </form>
- 
+
         </div>
     </section>
- 
+
     <script>
         document.querySelectorAll('.kondisi-card input[type="radio"]').forEach(radio => {
             radio.addEventListener('change', () => {
@@ -159,6 +159,6 @@
             });
         });
     </script>
- 
+
 @endsection
- 
+
