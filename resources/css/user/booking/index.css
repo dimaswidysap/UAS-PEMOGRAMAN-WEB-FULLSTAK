@@ -11,6 +11,7 @@
     max-width: 1100px;
     margin: 0 auto;
     display: grid;
+    justify-content: center;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1.5rem;
     padding: 10rem 2rem 3rem 2rem;
@@ -147,5 +148,124 @@
 
     .room-page {
         padding: 1rem 1rem 3rem;
+    }
+}
+/* ===========================
+   No Match Message
+=========================== */
+
+.no-match-message {
+    display: none;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+
+    padding: 40px 30px;
+
+    background: var(--base);
+    border: 2px dashed var(--border);
+    border-radius: 18px;
+
+    text-align: center;
+    box-sizing: border-box;
+
+    animation: fadeIn 0.35s ease;
+}
+
+.no-match-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    width: 80px;
+    height: 80px;
+
+    margin-bottom: 18px;
+
+    background: var(--background);
+    border: 2px solid var(--border);
+    border-radius: 50%;
+}
+
+.no-match-icon svg {
+    width: 38px;
+    height: 38px;
+
+    color: var(--secondary);
+}
+
+.no-match-message h3 {
+    margin: 0 0 10px;
+
+    font-family: var(--font-secondary);
+    font-size: 22px;
+    font-weight: 700;
+
+    color: var(--secondary);
+}
+
+.no-match-message p {
+    margin: 0 0 8px;
+
+    font-family: var(--font-primary);
+    font-size: 16px;
+    line-height: 1.6;
+
+    color: var(--text);
+}
+
+.no-match-message span {
+    font-family: var(--font-primary);
+    font-size: 14px;
+    line-height: 1.5;
+
+    color: #7a7a7a;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media (max-width: 480px) {
+    .no-match-message {
+        margin: 24px 16px;
+        padding: 28px 20px;
+    }
+
+    .no-match-icon {
+        width: 70px;
+        height: 70px;
+    }
+
+    .no-match-icon svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    .no-match-message h3 {
+        font-size: 20px;
+    }
+
+    .no-match-message p {
+        font-size: 15px;
+    }
+
+    .no-match-message span {
+        font-size: 13px;
     }
 }
