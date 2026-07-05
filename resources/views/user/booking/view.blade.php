@@ -80,7 +80,7 @@
 
 
                 <div class="button-group">
-                    <a href="#" class="booking-btn">
+                    <a href="{{ route('proses-booking', $room->id) }}" class="booking-btn">
                         Pesan Ruangan
                     </a>
 

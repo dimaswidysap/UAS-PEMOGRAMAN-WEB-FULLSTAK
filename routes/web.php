@@ -6,7 +6,9 @@ use App\Http\Controllers\Admin\Category;
 use App\Http\Controllers\Admin\AdminRooms;
 use App\Http\Controllers\Admin\AdminUsers;
 use App\Http\Controllers\Admin\AdminFacilities;
+use App\Http\Controllers\Admin\ProsesBookingController;
 use App\Http\Controllers\User\UserBooking;
+use App\Http\Controllers\User\pengajuan;
 use App\Http\Controllers\User\ProfilController;
 use App\Http\Controllers\Auth\Signup;
 use App\Http\Controllers\Auth\UserLoginController;
@@ -20,21 +22,25 @@ route::get('/signup', function () {
     return view('auth.signup');
 })->name('signup-page');
 
-
-
-
 Route::prefix('/user')->group(function () {
     // route public
     Route::post('/create-user', [Signup::class, 'createUser'])->name('create-user');
     // menampilkan halaman login
-    Route::get('/login',[UserLoginController::class,'showLoginForm'])->name('login-page');
-    Route::post('/loginSubmit',[UserLoginController::class,'loginUser'])->name('user-login-submit');
-    route::get('/logoutUser',[UserLoginController::class,'userLogout'])->name('user-logout');
+    Route::get('/login', [UserLoginController::class, 'showLoginForm'])->name('login-page');
+    Route::post('/loginSubmit', [UserLoginController::class, 'loginUser'])->name('user-login-submit');
+    route::get('/logoutUser', [UserLoginController::class, 'userLogout'])->name('user-logout');
 
     Route::middleware(['auth', 'CheckUser'])->group(function () {
         Route::get('/', [UserBooking::class, 'index'])->name('index-user');
         Route::get('booking/detail/{id}', [UserBooking::class, 'bookingDetail'])->name('booking-detail');
         Route::get('/profil', [ProfilController::class, 'index'])->name('profil-index');
+
+        //
+      Route::get('/pengajuan',[pengajuan::class,'index'])->name('index-pengajuan');
+
+        // proses booking
+        Route::get('/proses-booking/{room}', [ProsesBookingController::class, 'index'])->name('proses-booking');
+        Route::post('/proses-booking/{room}', [ProsesBookingController::class, 'store'])->name('proses-booking.store');
     });
 });
 
