@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\AdminAuth;
-use App\Http\Controllers\Admin\Admin;
+
+use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\Category;
 use App\Http\Controllers\Admin\AdminRooms;
 use App\Http\Controllers\Admin\AdminUsers;
@@ -36,7 +37,7 @@ Route::prefix('/user')->group(function () {
         Route::get('/profil', [ProfilController::class, 'index'])->name('profil-index');
 
         //
-      Route::get('/pengajuan',[pengajuan::class,'index'])->name('index-pengajuan');
+        Route::get('/pengajuan', [pengajuan::class, 'index'])->name('index-pengajuan');
 
         // proses booking
         Route::get('/proses-booking/{room}', [ProsesBookingController::class, 'index'])->name('proses-booking');
@@ -58,7 +59,9 @@ Route::prefix('admin')->group(function () {
 
     Route::middleware(['auth', 'CheckAdmin'])->group(function () {
         // Dashboard
-        Route::get('/', [Admin::class, 'index'])->name('dashboard-index');
+        Route::get('/', [BookingController::class, 'index'])->name('dashboard-index');
+        Route::post('/booking/{booking}/approve', [BookingController::class, 'approve'])->name('admin.booking.approve');
+        Route::post('/booking/{booking}/reject', [BookingController::class, 'reject'])->name('admin.booking.reject');
 
         // Facilities
         Route::get('/facilities', [AdminFacilities::class, 'index'])->name('facility-index');

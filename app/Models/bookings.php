@@ -54,7 +54,7 @@ class bookings extends Model
 
     public function slots(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(booking_slots::class);
+        return $this->hasMany(booking_slots::class,'booking_id');
     }
 
     public function approvals(): \Illuminate\Database\Eloquent\Relations\HasMany
