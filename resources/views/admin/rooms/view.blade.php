@@ -1,126 +1,172 @@
 @extends('layouts.app')
-@vite(['resources/css/admin/rooms/view.css'])
+
+@vite([
+    'resources/css/admin/rooms/view.css',
+    'resources/js/admin/rooms/view.js'
+])
+
 @section('content')
+@include('components.navigasi-admin.index')
 
-<h1>Detail Ruangan</h1>
+<div class="room-container">
 
-<table border="1" cellpadding="8" cellspacing="0">
-    <tr>
-        <th>ID</th>
-        <td>{{ $view->id }}</td>
-    </tr>
+    <div class="card">
 
-    <tr>
-        <th>Nama Ruangan</th>
-        <td>{{ $view->name }}</td>
-    </tr>
+        <div class="card-header">
 
-    <tr>
-        <th>Kode Ruangan</th>
-        <td>{{ $view->code }}</td>
-    </tr>
+            <div class="card-title">
 
-    <tr>
-        <th>ID Kategori</th>
-        <td>{{ $view->category_id }}</td>
-    </tr>
+                <div class="icon-box">
+                    🏢
+                </div>
 
-    <tr>
-        <th>Gedung</th>
-        <td>{{ $view->building }}</td>
-    </tr>
+                <div>
 
-    <tr>
-        <th>Lantai</th>
-        <td>{{ $view->floor }}</td>
-    </tr>
+                    <h2>{{ $view->name }}</h2>
 
-    <tr>
-        <th>Kapasitas</th>
-        <td>{{ $view->capacity }}</td>
-    </tr>
+                    <p>
+                        Detail informasi ruangan
+                    </p>
 
-    <tr>
-        <th>Deskripsi</th>
-        <td>{{ $view->description }}</td>
-    </tr>
+                </div>
 
-    <tr>
-        <th>Status</th>
-        <td>
-            {{ $view->is_active ? 'Aktif' : 'Tidak Aktif' }}
-        </td>
-    </tr>
+            </div>
 
-    <tr>
-        <th>Jam Buka</th>
-        <td>{{ $view->open_time }}</td>
-    </tr>
+            <div class="step">
+                Detail
+            </div>
 
-    <tr>
-        <th>Jam Tutup</th>
-        <td>{{ $view->close_time }}</td>
-    </tr>
+        </div>
 
-    <tr>
-        <th>Dibuat Pada</th>
-        <td>{{ $view->created_at }}</td>
-    </tr>
+        <div class="detail-grid">
 
-    <tr>
-        <th>Diubah Pada</th>
-        <td>{{ $view->updated_at }}</td>
-    </tr>
-</table>
+            <div class="detail-item">
+                <span>Kode</span>
+                <strong>{{ $view->code }}</strong>
+            </div>
 
-<br>
+            <div class="detail-item">
+                <span>Kategori</span>
+                <strong>{{ $view->category->name }}</strong>
+            </div>
 
-<h2>Gambar Ruangan</h2>
+            <div class="detail-item">
+                <span>Gedung</span>
+                <strong>{{ $view->building }}</strong>
+            </div>
 
-<div>
-    @if ($view->image)
+            <div class="detail-item">
+                <span>Lantai</span>
+                <strong>{{ $view->floor }}</strong>
+            </div>
 
-    <figure class="container-image-view">
+            <div class="detail-item">
+                <span>Kapasitas</span>
+                <strong>{{ $view->capacity }} Orang</strong>
+            </div>
+
+            <div class="detail-item">
+                <span>Status</span>
+
+                @if($view->is_active)
+
+                    <span class="status available">
+                        Aktif
+                    </span>
+
+                @else
+
+                    <span class="status booked">
+                        Tidak Aktif
+                    </span>
+
+                @endif
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <div class="card-title">
+
+                <div class="icon-box">
+                    📝
+                </div>
+
+                <div>
+
+                    <h2>Deskripsi</h2>
+
+                    <p>
+                        Informasi tambahan ruangan
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <p class="description">
+
+            {{ $view->description ?: 'Belum ada deskripsi.' }}
+
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <div class="card-title">
+
+                <div class="icon-box">
+                    🖼️
+                </div>
+
+                <div>
+
+                    <h2>Foto Ruangan</h2>
+
+                </div>
+
+            </div>
+
+        </div>
 
         <img
-        src="{{ asset('uploads/rooms/' . $view->image) }}"
-        alt="{{ $view->name }}"
-        width="500"
-        >
-    </figure>
-    @else
-        <p>Belum ada gambar ruangan.</p>
-    @endif
+            class="room-image"
+            src="{{ asset('uploads/rooms/'.$view->image) }}"
+            alt="{{ $view->name }}">
+
+    </div>
+
+    <div class="footer-action">
+
+        <a
+            href="{{ route('index-rooms') }}"
+            class="btn-cancel">
+
+            Kembali
+
+        </a>
+
+        <a
+            href="{{ route('room-update-form',$view->id) }}"
+            class="btn-save">
+
+            Edit Ruangan
+
+        </a>
+
+    </div>
+
 </div>
-
-
-<h3>Fasilitas Ruangan</h3>
-
-<table>
-    <thead>
-        <tr>
-            <th>Nama Fasilitas</th>
-            <th>Jumlah</th>
-            <th>Kondisi</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($view->facilities as $facility)
-            <tr>
-                <td>{{ $facility->name }}</td>
-                <td>{{ $facility->quantity }}</td>
-                <td>{{ $facility->condition }}</td>
-            </tr>
-        @endforeach
-    </tbody>
-</table>
-
-<br>
-
-
-
-<a href="{{ route('index-rooms') }}">
-    Kembali
-</a>
 
 @endsection
