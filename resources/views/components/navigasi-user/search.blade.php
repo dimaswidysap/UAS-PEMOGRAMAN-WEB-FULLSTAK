@@ -1,5 +1,5 @@
 <section class="container-search">
-    <input type="text" placeholder="cari ruangan...">
+    <input id='search-room' type="text" placeholder="cari ruangan...">
     <button class="btn-search">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
@@ -8,4 +8,5 @@
         </svg>
     </button>
 </section>
+
 

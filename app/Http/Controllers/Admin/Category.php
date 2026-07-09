@@ -48,48 +48,41 @@ class Category extends Controller
 
     public function showUpdateForm($id)
     {
-        $room = \App\Models\room::findOrFail($id); 
-        $category = room_categories::all();
+        $category = room_categories::findOrFail($id);
 
-        return view('admin.category.update', compact('room', 'category'));
+        return view('admin.category.update', compact('category'));
     }
 
     public function update(Request $request, $id)
     {
-        $room = \App\Models\room::findOrFail($id);
+        // Cari data kategori berdasarkan ID, ganti 'Category' dengan nama Model Kategori Anda (misal: RoomCategory)
+        $category = room_categories::findOrFail($id);
 
         $request->validate([
-            'name'        => 'required|string|max:255',
-            'code'        => 'required|string|unique:rooms,code,' . $room->id, 
-            'category_id' => 'required|exists:room_categories,id',
-            'building'    => 'required|string',
-            'floor'       => 'required|integer',
-            'capacity'    => 'required|integer',
+            'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:room_categories,slug,' . $id, // sesuaikan nama tabel kategori Anda
+            'icon' => 'nullable|string|max:255',
+            'color' => 'required|string|max:7',
             'description' => 'nullable|string',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048', 
-            'is_active'   => 'required|boolean',
-            'open_time'   => 'required',
-            'close_time'  => 'required',
+            'max_booking_days_ahead' => 'required|integer|min:0',
+            'max_duration_hours' => 'required|integer|min:0',
+            'min_duration_minutes' => 'required|integer|min:0',
+            'sort_order' => 'required|integer|min:0',
         ]);
 
+        // Ambil semua input data
         $input = $request->all();
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imgName = time() . '.' . $image->getClientOriginalExtension();
-            $destinationPath = public_path('/uploads/rooms');
-            $image->move($destinationPath, $imgName);
+        // Checkbox di HTML tidak mengirimkan data jika tidak dicentang,
+        // jadi kita set manual nilainya ke 0 jika kosong.
+        $input['requires_approval'] = $request->has('requires_approval') ? 1 : 0;
+        $input['is_active'] = $request->has('is_active') ? 1 : 0;
 
-            if ($room->image && file_exists(public_path('/uploads/rooms/' . $room->image))) {
-                unlink(public_path('/uploads/rooms/' . $room->image));
-            }
+        // Update data kategori
+        $category->update($input);
 
-            $input['image'] = $imgName;
-        }
-
-        $room->update($input);
-
-        return redirect()->route('index-rooms')->with('success', 'Data ruangan berhasil diperbarui.');
+        // Redirect ke halaman indeks kategori
+        return redirect()->route('index-category')->with('success', 'Kategori ruangan berhasil diperbarui.');
     }
 
     public function destroy($id)
@@ -97,8 +90,6 @@ class Category extends Controller
         $category = room_categories::findOrFail($id);
         $category->delete();
 
-        return redirect()
-            ->route('index-category')
-            ->with('success', 'Kategori berhasil dihapus.');
+        return redirect()->route('index-category')->with('success', 'Kategori berhasil dihapus.');
     }
 }

@@ -1,0 +1,171 @@
+
+
+/* Base Body/Container adjustment to mimic the reference preview background */
+body {
+    background-color: var(--background);
+    font-family: var(--font-primary);
+    color: var(--text);
+    margin: 0;
+    padding: 20px;
+}
+
+.main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Section styling */
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-section h1 {
+    font-family: var(--font-secondary);
+    color: var(--secondary);
+    font-size: 24px;
+    margin: 0;
+}
+
+/* Button Tambah */
+.btn-tambah {
+    background-color: var(--secondary);
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.2s ease;
+}
+
+.btn-tambah:hover {
+    opacity: 0.9;
+}
+
+/* Alert Success */
+.alert-success {
+    background-color: rgba(16, 185, 129, 0.15);
+    color: var(--accent);
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    border: 1px solid var(--accent);
+}
+
+/* Table Card Wrapper */
+.table-container {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+    padding: 8px;
+}
+
+/* Table Styling */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 14px;
+}
+
+.custom-table th {
+    background-color: #ffffff;
+    color: var(--secondary);
+    font-family: var(--font-secondary);
+    font-weight: 700;
+    padding: 18px 16px;
+    border-bottom: 2px solid #f3f4f6;
+}
+
+.custom-table td {
+    padding: 16px;
+    border-bottom: 1px solid #f3f4f6;
+    color: var(--text);
+    vertical-align: middle;
+}
+
+/* ID Styling bold */
+.data-id {
+    font-weight: bold;
+}
+
+/* Utility alignments */
+.text-center {
+    text-align: center;
+}
+
+.no-data {
+    color: #9ca3af;
+    padding: 30px !important;
+    font-style: italic;
+}
+
+/* Badge untuk Kondisi */
+.badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    background-color: rgba(16, 185, 129, 0.1); /* Default light green */
+    color: var(--accent);
+}
+
+/* Action Buttons Grid/Flex */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+/* General Button Action Styles */
+.btn-action {
+    display: inline-block;
+    background: #ffffff;
+    text-decoration: none;
+    font-family: var(--font-primary);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid var(--border);
+}
+
+/* Detail Button */
+.btn-detail {
+    color: #4b5563;
+    border-color: var(--border);
+}
+
+.btn-detail:hover {
+    background-color: var(--base);
+}
+
+/* Edit Button */
+.btn-edit {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.btn-edit:hover {
+    background-color: rgba(16, 185, 129, 0.05);
+}
+
+/* Hapus Button */
+.btn-hapus {
+    color: var(--danger);
+    border-color: var(--danger);
+    outline: none;
+}
+
+.btn-hapus:hover {
+    background-color: rgba(188, 0, 0, 0.05);
+}

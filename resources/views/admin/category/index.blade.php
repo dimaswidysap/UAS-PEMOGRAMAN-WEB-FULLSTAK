@@ -5,7 +5,7 @@
 
 @section('content')
     @include('components.navigasi-admin.index')
-    
+
     {{-- Seluruh isi HTML wajib berada di dalam blok @section dan sebelum @endsection --}}
     <section class="main-container">
         <div class="header-title-wrapper">
@@ -56,11 +56,11 @@
                                     <a href="{{ route('category-view', $category->id) }}" class="btn-action btn-view">
                                         Detail
                                     </a>
-                                    
+
                                     <a href="{{ route('category-update', $category->id) }}" class="btn-action btn-edit">
                                         Edit
                                     </a>
-                                    
+
                                     <form action="{{ route('category-destroy', $category->id) }}" method="POST" class="inline-form">
                                         @csrf
                                         @method('DELETE')

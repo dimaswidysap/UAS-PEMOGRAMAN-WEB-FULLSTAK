@@ -1,12 +1,15 @@
 <?php
 
 use App\Http\Controllers\Auth\AdminAuth;
-use App\Http\Controllers\Admin\Admin;
+
+use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\Category;
 use App\Http\Controllers\Admin\AdminRooms;
 use App\Http\Controllers\Admin\AdminUsers;
 use App\Http\Controllers\Admin\AdminFacilities;
+use App\Http\Controllers\Admin\ProsesBookingController;
 use App\Http\Controllers\User\UserBooking;
+use App\Http\Controllers\User\pengajuan;
 use App\Http\Controllers\User\ProfilController;
 use App\Http\Controllers\Auth\Signup;
 use App\Http\Controllers\Auth\UserLoginController;
@@ -20,20 +23,25 @@ route::get('/signup', function () {
     return view('auth.signup');
 })->name('signup-page');
 
-
-
 Route::prefix('/user')->group(function () {
     // route public
     Route::post('/create-user', [Signup::class, 'createUser'])->name('create-user');
     // menampilkan halaman login
-    Route::get('/login',[UserLoginController::class,'showLoginForm'])->name('login-page');
-    Route::post('/loginSubmit',[UserLoginController::class,'loginUser'])->name('user-login-submit');
-    route::get('/logoutUser',[UserLoginController::class,'userLogout'])->name('user-logout');
+    Route::get('/login', [UserLoginController::class, 'showLoginForm'])->name('login-page');
+    Route::post('/loginSubmit', [UserLoginController::class, 'loginUser'])->name('user-login-submit');
+    route::get('/logoutUser', [UserLoginController::class, 'userLogout'])->name('user-logout');
 
     Route::middleware(['auth', 'CheckUser'])->group(function () {
         Route::get('/', [UserBooking::class, 'index'])->name('index-user');
         Route::get('booking/detail/{id}', [UserBooking::class, 'bookingDetail'])->name('booking-detail');
         Route::get('/profil', [ProfilController::class, 'index'])->name('profil-index');
+
+        //
+        Route::get('/pengajuan', [pengajuan::class, 'index'])->name('index-pengajuan');
+
+        // proses booking
+        Route::get('/proses-booking/{room}', [ProsesBookingController::class, 'index'])->name('proses-booking');
+        Route::post('/proses-booking/{room}', [ProsesBookingController::class, 'store'])->name('proses-booking.store');
     });
 });
 
@@ -51,7 +59,9 @@ Route::prefix('admin')->group(function () {
 
     Route::middleware(['auth', 'CheckAdmin'])->group(function () {
         // Dashboard
-        Route::get('/', [Admin::class, 'index'])->name('dashboard-index');
+        Route::get('/', [BookingController::class, 'index'])->name('dashboard-index');
+        Route::post('/booking/{booking}/approve', [BookingController::class, 'approve'])->name('admin.booking.approve');
+        Route::post('/booking/{booking}/reject', [BookingController::class, 'reject'])->name('admin.booking.reject');
 
         // Facilities
         Route::get('/facilities', [AdminFacilities::class, 'index'])->name('facility-index');
@@ -85,7 +95,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/category/create', [Category::class, 'showCreateForm'])->name('category-create');
         Route::post('/create', [Category::class, 'create'])->name('category-submit');
         Route::get('/category/update/{id}', [Category::class, 'showUpdateForm'])->name('category-update');
-       Route::post('/category/update/{id}', [Category::class, 'update'])->name('category-update-submit');
+        Route::post('/category/update/{id}', [Category::class, 'update'])->name('category-update-submit');
         Route::get('/category/{id}', [Category::class, 'view'])->name('category-view');
         Route::delete('/category/delete/{id}', [Category::class, 'destroy'])->name('category-destroy');
     });
