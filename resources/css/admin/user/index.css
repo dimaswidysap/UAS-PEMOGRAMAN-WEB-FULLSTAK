@@ -1,0 +1,181 @@
+/* ==========================================
+   1. LAYOUT UTAMA & FONT (Menciptakan Clean Look)
+   ========================================== */
+.main-container {
+    display: grid;
+    grid-template-columns: 1fr auto; /* Mengatur Judul di kiri, Tombol di kanan */
+    align-items: center;
+    row-gap: 24px;
+    max-width: 1150px;
+    margin: 40px auto;
+    padding: 0 24px;
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+}
+
+/* Menghilangkan tag <br> bawaan HTML agar tidak merusak jarak grid */
+.main-container br {
+    display: none;
+}
+
+/* ==========================================
+   2. DESAIN JUDUL (Dengan Garis Hijau di Bawah)
+   ========================================== */
+.main-container h1 {
+    grid-column: 1;
+    margin: 0;
+    font-size: 26px;
+    font-weight: 700;
+    color: #0f2d59; /* Warna Navy Premium */
+    position: relative;
+    padding-bottom: 12px;
+}
+
+/* Garis dekorasi hijau persis seperti di Screenshot (908) */
+.main-container h1::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 45px;
+    height: 4px;
+    background-color: #10b981; /* Accent Green */
+    border-radius: 10px;
+}
+
+/* ==========================================
+   3. TOMBOL TAMBAH USER (Kanan Atas)
+   ========================================== */
+.main-container > a {
+    grid-column: 2;
+    background-color: #1e3a8a; /* Biru Gelap Gelap */
+    color: #ffffff !important;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px -1px rgba(30, 58, 138, 0.2);
+}
+
+.main-container > a:hover {
+    background-color: #172554;
+    transform: translateY(-1px);
+}
+
+/* ==========================================
+   4. DESAIN TABEL MODERN (White Card & Rounded)
+   ========================================== */
+.main-container table {
+    grid-column: 1 / -1; /* Membentang penuh dari kiri ke kanan */
+    width: 100%;
+    border-collapse: separate !important; /* Wajib agar rounded corner berfungsi */
+    border-spacing: 0;
+    background: #ffffff;
+    border: 1px solid #e2e8f0 !important; /* Garis tepi tipis abu-abu */
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+/* Angkat & hilangkan paksa border="1" bawaan HTML jadul */
+.main-container table, 
+.main-container table th, 
+.main-container table td {
+    border: none !important;
+}
+
+/* Header Tabel (th) */
+.main-container table thead {
+    background-color: #f8fafc; /* Background pastel bersih */
+}
+
+.main-container table th {
+    padding: 16px 20px;
+    color: #1e3a8a;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0 !important;
+}
+
+/* Isi Tabel (td) */
+.main-container table td {
+    padding: 16px 20px;
+    color: #334155;
+    font-size: 14px;
+    border-bottom: 1px solid #f1f5f9 !important;
+    vertical-align: middle;
+}
+
+.main-container table tbody tr:last-child td {
+    border-bottom: none !important; /* Baris terakhir bersih tanpa garis bawah */
+}
+
+/* Highlight Khusus untuk Kolom ID (Tebal) */
+.main-container table td:first-child {
+    font-weight: 700;
+    color: #0f2d59;
+}
+
+/* ==========================================
+   5. TOMBOL AKSI (Detail, Edit, Hapus)
+   ========================================== */
+/* Trik Genius: set font-size ke 0 untuk menghilangkan teks mentah pipe "|" */
+.main-container table td:last-child {
+    font-size: 0; 
+    white-space: nowrap;
+}
+
+/* Styling tombol aksi agar seragam */
+.main-container table td:last-child a,
+.main-container table td:last-child button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: inherit;
+    padding: 6px 14px;
+    margin-right: 8px;
+    border-radius: 6px;
+    background: #ffffff;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+/* Form pembungkus tombol hapus */
+.main-container table td:last-child form {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+/* Tombol Detail (Abu-abu) */
+.main-container table td:last-child a:nth-of-type(1) {
+    border: 1px solid #d1d5db !important;
+    color: #4b5563 !important;
+}
+.main-container table td:last-child a:nth-of-type(1):hover {
+    background-color: #f3f4f6;
+}
+
+/* Tombol Edit (Hijau) */
+.main-container table td:last-child a:nth-of-type(2) {
+    border: 1px solid #10b981 !important;
+    color: #10b981 !important;
+}
+.main-container table td:last-child a:nth-of-type(2):hover {
+    background-color: #ecfdf5;
+}
+
+/* Tombol Hapus (Merah) */
+.main-container table td:last-child button {
+    border: 1px solid #ef4444 !important;
+    color: #ef4444 !important;
+}
+.main-container table td:last-child button:hover {
+    background-color: #fef2f2;
+}

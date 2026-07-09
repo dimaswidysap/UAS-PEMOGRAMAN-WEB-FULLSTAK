@@ -22,7 +22,7 @@
 
                 <div>
 
-                    <h2>{{ $view->name }}</h2>
+                    <h2>{{ $room->name }}</h2>
 
                     <p>
                         Detail informasi ruangan
@@ -42,33 +42,33 @@
 
             <div class="detail-item">
                 <span>Kode</span>
-                <strong>{{ $view->code }}</strong>
+                <strong>{{ $room->code }}</strong>
             </div>
 
             <div class="detail-item">
                 <span>Kategori</span>
-                <strong>{{ $view->category->name }}</strong>
+                <strong>{{ $room->category->name }}</strong>
             </div>
 
             <div class="detail-item">
                 <span>Gedung</span>
-                <strong>{{ $view->building }}</strong>
+                <strong>{{ $room->building }}</strong>
             </div>
 
             <div class="detail-item">
                 <span>Lantai</span>
-                <strong>{{ $view->floor }}</strong>
+                <strong>{{ $room->floor }}</strong>
             </div>
 
             <div class="detail-item">
                 <span>Kapasitas</span>
-                <strong>{{ $view->capacity }} Orang</strong>
+                <strong>{{ $room->capacity }} Orang</strong>
             </div>
 
             <div class="detail-item">
                 <span>Status</span>
 
-                @if($view->is_active)
+                @if($room->is_active)
 
                     <span class="status available">
                         Aktif
@@ -114,7 +114,7 @@
 
         <p class="description">
 
-            {{ $view->description ?: 'Belum ada deskripsi.' }}
+            {{ $room->description ?: 'Belum ada deskripsi.' }}
 
         </p>
 
@@ -142,8 +142,8 @@
 
         <img
             class="room-image"
-            src="{{ asset('uploads/rooms/'.$view->image) }}"
-            alt="{{ $view->name }}">
+            src="{{ asset('uploads/rooms/'.$room->image) }}"
+            alt="{{ $room->name }}">
 
     </div>
 
@@ -158,7 +158,7 @@
         </a>
 
         <a
-            href="{{ route('room-update-form',$view->id) }}"
+            href="{{ route('room-update-form',$room->id) }}"
             class="btn-save">
 
             Edit Ruangan

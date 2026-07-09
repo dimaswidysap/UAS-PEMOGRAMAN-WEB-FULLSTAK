@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @vite([
-    'resources/css/admin/rooms/create.css',
-    'resources/js/admin/rooms/create.js'
+    'resources/css/admin/rooms/index.css',
+    'resources/js/admin/rooms/index.js'
 ])
-
+@include('components.navigasi-admin.index')
 @section('content')
 <section class="room-container">
 

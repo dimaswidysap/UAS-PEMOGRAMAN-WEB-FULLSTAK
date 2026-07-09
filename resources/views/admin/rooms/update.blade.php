@@ -1,11 +1,11 @@
-@extends('layouts.app')
+<!-- @extends('layouts.app')
 
 @vite([
     'resources/css/admin/rooms/update.css',
     'resources/js/admin/rooms/update.js'
 ])
 
-@section('content')
+@section('content') -->
 <form action="{{ route('room-update-submit',$room->id) }}"
       method="POST"
       enctype="multipart/form-data">

@@ -18,13 +18,13 @@ class AdminRooms extends Controller
     }
 
     public function view($id)
-    {
-        $view = rooms::with('facilities')->findOrFail($id);
+{
+    // Ubah $view menjadi $room
+    $room = rooms::with('facilities')->findOrFail($id);
 
-        // dd($view);
-
-        return view('admin.rooms.view', compact('view'));
-    }
+    // Kirim dengan nama compact('room')
+    return view('admin.rooms.view', compact('room'));
+}
 
     public function showCreateForm()
     {

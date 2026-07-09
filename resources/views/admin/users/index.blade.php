@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+    @vite([
+        'resources/css/admin/user/index.css',
+        'resources/js/admin/user/index.js'
+    ])
     @include('components.navigasi-admin.index')
     <section class="main-container">
         <h1>Daftar User</h1>

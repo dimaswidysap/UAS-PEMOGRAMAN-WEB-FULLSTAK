@@ -1,0 +1,206 @@
+/* ==========================================
+   1. ADJUSTMENT UTAMA (Menggunakan class yang ada)
+   ========================================== */
+body {
+    background-color: #f8fafc; /* Warna background pastel bersih */
+    margin: 0;
+    padding: 0;
+}
+
+.main-container {
+    display: grid;
+    grid-template-columns: 1fr auto; /* Membagi Judul di kiri, Tombol di kanan */
+    align-items: center;
+    row-gap: 24px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 24px;
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+}
+
+/* Hilangkan tag <br> bawaan agar tidak merusak jarak layout grid */
+.main-container br {
+    display: none;
+}
+
+/* ==========================================
+   2. STYLING JUDUL H1
+   ========================================== */
+.main-container h1 {
+    grid-column: 1;
+    margin: 0;
+    font-size: 26px;
+    font-weight: 700;
+    color: #0f2d59; /* Navy Premium */
+    position: relative;
+    padding-bottom: 12px;
+}
+
+/* Garis dekorasi hijau di bawah judul */
+.main-container h1::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 45px;
+    height: 4px;
+    background-color: #10b981;
+    border-radius: 10px;
+}
+
+/* ==========================================
+   3. STYLING TOMBOL TAMBAH FASILITAS (Tag <a> pertama)
+   ========================================== */
+.main-container > a {
+    grid-column: 2;
+    background-color: #1e3a8a; /* Biru Gelap */
+    color: #ffffff !important;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.2s ease;
+    box-shadow: 0 4px 6px -1px rgba(30, 58, 138, 0.2);
+}
+
+.main-container > a:hover {
+    background-color: #172554;
+    transform: translateY(-1px);
+}
+
+/* ==========================================
+   4. STYLING ALERT SUCCESS (Tag <p> hasil session)
+   ========================================== */
+.main-container > p {
+    grid-column: 1 / -1;
+    background-color: rgba(16, 185, 129, 0.11);
+    color: #10b981;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin: 0;
+    font-weight: 500;
+    border: 1px solid #10b981;
+}
+
+/* ==========================================
+   5. STYLING TABEL MODERN (White Card)
+   ========================================== */
+.main-container table {
+    grid-column: 1 / -1; /* Membentang penuh */
+    width: 100%;
+    border-collapse: separate !important; /* Wajib agar rounded corner jalan */
+    border-spacing: 0;
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    border: 1px solid #e2e8f0 !important; /* Overwrite border jadul */
+}
+
+/* Hapus paksa attribute border="1" di HTML */
+.main-container table, 
+.main-container table th, 
+.main-container table td {
+    border: none !important;
+}
+
+/* Header Tabel */
+.main-container table thead {
+    background-color: #ffffff;
+}
+
+.main-container table th {
+    color: #1e3a8a;
+    font-weight: 700;
+    padding: 18px 20px;
+    border-bottom: 2px solid #f3f4f6 !important;
+    font-size: 14px;
+}
+
+/* Isi Tabel */
+.main-container table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid #f3f4f6 !important;
+    color: #334155;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.main-container table tbody tr:last-child td {
+    border-bottom: none !important; /* Baris terakhir bersih */
+}
+
+/* ID dibuat Bold */
+.main-container table td:first-child {
+    font-weight: bold;
+    color: #0f2d59;
+}
+
+/* Kolom Kondisi (Otomatis Hijau/Kapsul) */
+.main-container table td:nth-child(5) {
+    font-weight: 600;
+    color: #10b981;
+}
+
+/* ==========================================
+   6. TOMBOL AKSI (Detail, Edit, Hapus)
+   ========================================== */
+/* Set font-size: 0 untuk menghilangkan tanda pipa "|" secara gaib */
+.main-container table td:last-child {
+    font-size: 0;
+    white-space: nowrap;
+}
+
+/* Base style untuk semua tombol aksi */
+.main-container table td:last-child a,
+.main-container table td:last-child button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 16px;
+    border-radius: 20px; /* Melengkung bulat oval */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-right: 8px;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+/* Form pembungkus tombol hapus */
+.main-container table td:last-child form {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+/* Tombol Detail (Abu-abu) */
+.main-container table td:last-child a:nth-of-type(1) {
+    color: #4b5563 !important;
+    border: 1px solid #d1d5db !important;
+}
+.main-container table td:last-child a:nth-of-type(1):hover {
+    background-color: #f3f4f6;
+}
+
+/* Tombol Edit (Hijau) */
+.main-container table td:last-child a:nth-of-type(2) {
+    color: #10b981 !important;
+    border: 1px solid #10b981 !important;
+}
+.main-container table td:last-child a:nth-of-type(2):hover {
+    background-color: rgba(16, 185, 129, 0.05);
+}
+
+/* Tombol Hapus (Merah) */
+.main-container table td:last-child button {
+    color: #ef4444 !important;
+    border: 1px solid #ef4444 !important;
+}
+.main-container table td:last-child button:hover {
+    background-color: rgba(239, 68, 68, 0.05);
+}

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@vite(['resources/css/admin/facilities/index.css', 'resources/js/admin/facilities/index.js'])
 @include('components.navigasi-admin.index')
 
 <section class="main-container">
