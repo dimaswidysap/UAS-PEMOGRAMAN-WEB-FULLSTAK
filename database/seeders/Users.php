@@ -45,7 +45,7 @@ class Users extends Seeder
             [
                 'name' => 'yanuar',
                 'email' => 'yanuar@gmail.com',
-                'password' => 'adam123',
+                'password' => 'yanuar123',
                 'role' => 'admin',
             ],
             [

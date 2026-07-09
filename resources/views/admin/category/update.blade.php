@@ -1,156 +1,250 @@
-<form action="{{ route('category-update-submit', $room->id) }}" method="POST" enctype="multipart/form-data" class="modern-form">
-    @csrf
+@extends('layouts.app')
 
-    <div class="section-card">
-        <div class="section-header">
-            <div class="section-title">
-                <span class="icon">🏢</span> Informasi Ruangan
-            </div>
-            <div class="step-number">1</div>
-        </div>
-
-        <div class="form-grid">
-            <div class="form-group">
-                <label>Nama Ruangan</label>
-                <input type="text" name="name" class="@error('name') is-invalid @enderror" value="{{ old('name', $room->name) }}" placeholder="Contoh: Ruang Meeting Merapi">
-                @error('name') <span class="error-message">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="form-group">
-                <label>Kode Ruangan</label>
-                <input type="text" name="code" class="@error('code') is-invalid @enderror" value="{{ old('code', $room->code) }}" placeholder="Contoh: R-101">
-                @error('code') <span class="error-message">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="form-group">
-                <label>Kategori</label>
-                <select name="category_id" class="@error('category_id') is-invalid @enderror">
-                    @foreach($category as $item)
-                        <option value="{{ $item->id }}" {{ $room->category_id == $item->id ? 'selected' : '' }}>
-                            {{ $item->name }}
-                        </option>
-                    @endforeach
-                </select>
-                @error('category_id') <span class="error-message">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="form-group">
-                <label>Gedung</label>
-                <input type="text" name="building" class="@error('building') is-invalid @enderror" value="{{ old('building', $room->building) }}" placeholder="Contoh: Gedung A Utama">
-                @error('building') <span class="error-message">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="form-group">
-                <label>Lantai</label>
-                <input type="number" name="floor" class="@error('floor') is-invalid @enderror" value="{{ old('floor', $room->floor) }}" placeholder="0">
-                @error('floor') <span class="error-message">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="form-group">
-                <label>Kapasitas (Orang)</label>
-                <input type="number" name="capacity" class="@error('capacity') is-invalid @enderror" value="{{ old('capacity', $room->capacity) }}" placeholder="0">
-                @error('capacity') <span class="error-message">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="form-group full-width">
-                <label>Deskripsi Ruangan</label>
-                <textarea name="description" rows="4" class="@error('description') is-invalid @enderror" placeholder="Tuliskan fasilitas atau detail ruangan di sini...">{{ old('description', $room->description) }}</textarea>
-                @error('description') <span class="error-message">{{ $message }}</span> @enderror
-            </div>
-        </div>
-    </div>
-
-    <div class="section-card">
-        <div class="section-header">
-            <div class="section-title">
-                <span class="icon">🖼️</span> Gambar Ruangan
-            </div>
-            <div class="step-number">2</div>
-        </div>
-
-        <div class="image-wrapper">
-            <div class="image-box">
-                <label class="image-label">Gambar Saat Ini</label>
-                <div class="img-container">
-                    <img src="{{ asset('uploads/rooms/'.$room->image) }}" class="preview-image" alt="Current Room Image">
+@vite(['resources/css/admin/category/create.css'])
+@section('content')
+    <section class="main-container">
+        <div class="cat-page">
+            <div class="hero-head">
+                <div class="hero-text">
+                    <p class="eyebrow">Manajemen Venue</p>
+                    <h1>Update Kategori Ruangan</h1>
                 </div>
+                <a href="{{ route('index-category') }}" class="btn btn-outline">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M15 18l-6-6 6-6" />
+                    </svg>
+                    Kembali
+                </a>
             </div>
 
-            <div class="image-box">
-                <label class="image-label">Upload Gambar Baru</label>
-                <div class="file-upload-wrapper">
-                    <input type="file" name="image" id="imageInput" accept="image/*" class="@error('image') is-invalid @enderror">
-                    <div class="file-upload-design">
-                        <span class="upload-icon">📤</span>
-                        <span class="upload-text">Klik atau seret file gambar ke sini</span>
+            @if (session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
+
+
+            <form action="{{ route('category-update', $category->id) }}" method="POST" class="cat-form" id="catForm">
+                @csrf
+
+
+                <div class="card">
+                    <div class="step-marker">1</div>
+                    <div class="card-head">
+                        <div class="card-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="3" />
+                                <path d="M3 9h18" />
+                                <path d="M9 21V9" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h2>Informasi Dasar</h2>
+                            <p>Nama, identitas, dan deskripsi kategori</p>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="name">NAMA KATEGORI</label>
+                            <input type="text" name="name" id="name"
+                                class="form-control @error('name') is-invalid @enderror"
+                                value="{{ old('name', $category->name) }}" placeholder="Contoh: Gedung Pertemuan" required>
+                            @error('name')
+                                <span class="error-text">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="slug">SLUG</label>
+                            <input type="text" name="slug" id="slug"
+                                class="form-control @error('slug') is-invalid @enderror"
+                                value="{{ old('slug', $category->slug) }}" placeholder="gedung-pertemuan" required>
+                            @error('slug')
+                                <span class="error-text">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="icon">ICON <span class="optional">(mis. "building")</span></label>
+                            <input type="text" name="icon" id="icon"
+                                class="form-control @error('icon') is-invalid @enderror"
+                                value="{{ old('icon', $category->icon) }}" placeholder="building">
+                            @error('icon')
+                                <span class="error-text">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="color">WARNA PENANDA</label>
+                            <div class="color-field">
+                                <label class="color-swatch-wrap">
+                                    <input type="color" id="color_picker" value="{{ old('color', $category->color) }}">
+                                    <span class="color-swatch" id="colorSwatch"
+                                        style="background: {{ old('color', $category->color) }}"></span>
+                                </label>
+                                <input type="text" name="color" id="color"
+                                    class="form-control @error('color') is-invalid @enderror"
+                                    value="{{ old('color', $category->color) }}" placeholder="#3B82F6">
+                            </div>
+                            @error('color')
+                                <span class="error-text">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group full">
+                            <label for="description">DESKRIPSI</label>
+                            <textarea name="description" id="description" rows="4"
+                                class="form-control @error('description') is-invalid @enderror"
+                                placeholder="Jelaskan secara singkat kategori ruangan ini">{{ old('description', $category->description) }}</textarea>
+                            @error('description')
+                                <span class="error-text">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
                 </div>
-                @error('image') <span class="error-message">{{ $message }}</span> @enderror
-                
-                <div class="img-container mt-3" id="previewContainer" style="display:none;">
-                    <label class="image-label text-muted">Pratinjau Gambar Baru:</label>
-                    <img id="imagePreview" class="preview-image" alt="New Image Preview">
+
+                <div class="card">
+                    <div class="step-marker">2</div>
+                    <div class="card-head">
+                        <div class="card-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="9" />
+                                <path d="M12 7v5l3 3" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h2>Aturan Booking</h2>
+                            <p>Batasan waktu dan durasi pemesanan</p>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="max_booking_days_ahead">MAKS. BOOKING DI MUKA (HARI)</label>
+                            <div class="input-suffix">
+                                <!-- Perbaikan: melengkapi variabel yang terputus -->
+                                <input type="number" name="max_booking_days_ahead" id="max_booking_days_ahead"
+                                    class="form-control @error('max_booking_days_ahead') is-invalid @enderror"
+                                    value="{{ old('max_booking_days_ahead', $category->max_booking_days_ahead) }}"
+                                    placeholder="30" min="0">
+                                <span>hari</span>
+                            </div>
+                            @error('max_booking_days_ahead')
+                                <span class="error-text">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="max_duration_hours">MAKS. DURASI</label>
+                            <div class="input-suffix">
+                                <input type="number" name="max_duration_hours" id="max_duration_hours"
+                                    class="form-control @error('max_duration_hours') is-invalid @enderror"
+                                    value="{{ old('max_duration_hours', $category->max_duration_hours) }}"
+                                    placeholder="8" min="0">
+                                <span>jam</span>
+                            </div>
+                            @error('max_duration_hours')
+                                <span class="error-text">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="min_duration_minutes">MIN. DURASI</label>
+                            <div class="input-suffix">
+                                <input type="number" name="min_duration_minutes" id="min_duration_minutes"
+                                    class="form-control @error('min_duration_minutes') is-invalid @enderror"
+                                    value="{{ old('min_duration_minutes', $category->min_duration_minutes) }}"
+                                    placeholder="30" min="0">
+                                <span>menit</span>
+                            </div>
+                            @error('min_duration_minutes')
+                                <span class="error-text">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sort_order">URUTAN TAMPIL</label>
+                            <input type="number" name="sort_order" id="sort_order"
+                                class="form-control @error('sort_order') is-invalid @enderror"
+                                value="{{ old('sort_order', $category->sort_order) }}" min="0">
+                            @error('sort_order')
+                                <span class="error-text">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
-            </div>
+
+                <div class="card">
+                    <div class="step-marker">3</div>
+                    <div class="card-head">
+                        <div class="card-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M9 12l2 2 4-4" />
+                                <circle cx="12" cy="12" r="9" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h2>Status</h2>
+                            <p>Visibilitas dan persetujuan kategori</p>
+                        </div>
+                    </div>
+
+                    <div class="toggle-grid">
+                        <label class="toggle-card">
+                            <!-- Perbaikan: Logika checked berdasarkan data database / input sebelumnya -->
+                            <input type="checkbox" name="requires_approval" value="1"
+                                {{ old('requires_approval', $category->requires_approval) == '1' ? 'checked' : '' }}>
+                            <span class="toggle-switch"></span>
+                            <span class="toggle-text">
+                                <strong>Perlu Approval</strong>
+                                <small>Booking harus disetujui admin sebelum dikonfirmasi</small>
+                            </span>
+                        </label>
+
+                        <label class="toggle-card">
+                            <!-- Perbaikan: Logika checked berdasarkan data database / input sebelumnya -->
+                            <input type="checkbox" name="is_active" value="1"
+                                {{ old('is_active', $category->is_active) == '1' ? 'checked' : '' }}>
+                            <span class="toggle-switch"></span>
+                            <span class="toggle-text">
+                                <strong>Aktifkan Kategori</strong>
+                                <small>Kategori akan langsung tampil & bisa dipilih</small>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M5 12l5 5L20 7" />
+                        </svg>
+                        Simpan Kategori
+                    </button>
+                    <a href="{{ route('index-category') }}" class="btn btn-ghost">Batal</a>
+                </div>
+            </form>
         </div>
-    </div>
 
-    <div class="section-card">
-        <div class="section-header">
-            <div class="section-title">
-                <span class="icon">⚙️</span> Pengaturan Operasional
-            </div>
-            <div class="step-number">3</div>
-        </div>
+        <script>
+            const colorPicker = document.getElementById('color_picker');
+            const colorText = document.getElementById('color');
+            const colorSwatch = document.getElementById('colorSwatch');
 
-        <div class="form-grid">
-            <div class="form-group">
-                <label>Status Ruangan</label>
-                <select name="is_active">
-                    <option value="1" {{ $room->is_active ? 'selected' : '' }}>🟢 Aktif (Dapat Dipesan)</option>
-                    <option value="0" {{ !$room->is_active ? 'selected' : '' }}>🔴 Tidak Aktif</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Jam Buka</label>
-                <input type="time" name="open_time" class="@error('open_time') is-invalid @enderror" value="{{ old('open_time', $room->open_time) }}">
-                @error('open_time') <span class="error-message">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="form-group">
-                <label>Jam Tutup</label>
-                <input type="time" name="close_time" class="@error('close_time') is-invalid @enderror" value="{{ old('close_time', $room->close_time) }}">
-                @error('close_time') <span class="error-message">{{ $message }}</span> @enderror
-            </div>
-        </div>
-    </div>
-
-    <div class="bottom-action">
-        <a href="/admin/category" class="btn-cancel">
-            Batal
-        </a>
-        <button class="btn-save" type="submit">
-            Simpan Perubahan
-        </button>
-    </div>
-</form>
-
-<script>
-    document.getElementById('imageInput').addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        const preview = document.getElementById('imagePreview');
-        const container = document.getElementById('previewContainer');
-        
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                preview.src = e.target.result;
-                container.style.display = 'block';
-            }
-            reader.readAsDataURL(file);
-        } else {
-            container.style.display = 'none';
-        }
-    });
-</script>
+            colorPicker.addEventListener('input', () => {
+                colorText.value = colorPicker.value;
+                colorSwatch.style.background = colorPicker.value;
+            });
+            colorText.addEventListener('input', () => {
+                if (/^#[0-9A-Fa-f]{6}$/.test(colorText.value)) {
+                    colorPicker.value = colorText.value;
+                    colorSwatch.style.background = colorText.value;
+                }
+            });
+        </script>
+    </section>
+@endsection

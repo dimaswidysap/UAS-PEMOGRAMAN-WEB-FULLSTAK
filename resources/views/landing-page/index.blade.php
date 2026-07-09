@@ -349,26 +349,6 @@
     </section>
 
     {{-- ===== FOOTER ===== --}}
-    <footer class="lp-footer">
-        <div class="footer-brand">
-            <div class="lp-logo-icon footer-logo-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
-                    <rect x="12" y="35" width="20" height="50" rx="2" fill="currentColor" />
-                    <rect x="38" y="15" width="24" height="70" rx="2" fill="currentColor" />
-                    <rect x="68" y="28" width="20" height="57" rx="2" fill="currentColor" />
-                </svg>
-            </div>
-            <strong>Booking</strong>
-        </div>
-        <nav class="footer-links">
-            <a href="#">Beranda</a>
-            <a href="#">Privasi</a>
-            <a href="#">Syarat</a>
-            <a href="#">Kontak</a>
-        </nav>
-        <p class="footer-copy">© {{ date('Y') }} Booking Madiun. All rights reserved.</p>
-    </footer>
-
+@include('components.footer.index')
 </div>
-
 @endsection

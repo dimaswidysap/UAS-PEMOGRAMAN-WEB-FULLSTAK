@@ -1,7 +1,7 @@
 /* ─── Wrapper ────────────────────────────────── */
 .signup-wrapper {
     min-height: 100vh;
-    background-color: var(--base);
+    /* background-color: var(--base); */
     display: flex;
     align-items: center;
     justify-content: center;
